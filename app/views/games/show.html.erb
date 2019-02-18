@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @game.name %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @game.desc %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @game.price %>
+</p>
+
+<%= link_to "Download", rails_blob_path(@game.source[0], disposition: 'attachment') %> |
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>
