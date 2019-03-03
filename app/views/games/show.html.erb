@@ -27,8 +27,20 @@
   <%= @game.price %>
 </p>
 
+<%= render 'reviews/form', review: @review %>	
 
+<% @reviews.each do |r| %>
+  <% if r.recommended %>
+    <strong>Recommended</strong>
+  <% else %>
+    <strong>Not Recommended</strong>
+  <% end %><br>
+  <%= r.user.email %><br>
+  <%= r.created_at.to_date %><br><br>
+  <%= r.text %><br>
 
+  <br>
+<% end %>
 <%= link_to "Download", rails_blob_path(@game.source[0], disposition: 'attachment') %> |
 <%= link_to 'Edit', edit_game_path(@game) %> |
 <%= link_to 'Back', games_path %>

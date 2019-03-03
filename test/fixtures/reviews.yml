@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  text: MyString
+  recommended: false
+  game: 
+  user: 
+
+two:
+  text: MyString
+  recommended: false
+  game: 
+  user: 

@@ -1,0 +1,38 @@
+<%= form_with(model: review, local: true) do |form| %>
+  <% if review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(review.errors.count, "error") %> prohibited this review from being saved:</h2>
+
+      <ul>
+      <% review.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if user_signed_in? %>
+
+    <div class="field">
+      <%= form.label :text %>
+      <%= form.text_area :text %>
+    </div>
+
+    <div class="field">
+      <%= form.label :recommended %>
+      <%= form.check_box :recommended %>
+    </div>
+
+    <div class="field">
+      <%= form.hidden_field :game, value: @game.id %>
+    </div>
+
+    <div class="field">
+      <%= form.hidden_field :user, value: current_user.id %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+<% end %>
