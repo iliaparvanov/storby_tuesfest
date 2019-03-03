@@ -10,10 +10,24 @@
   <%= @game.desc %>
 </p>
 
+<% if @game.relese_date %>
+	<p>
+	  <strong>Relese date:</strong>
+	  <%= @game.relese_date %>
+	</p>
+<% end %>
+
+<p>
+  <strong>Status:</strong>
+  <%= @game.status %>
+</p>
+
 <p>
   <strong>Price:</strong>
   <%= @game.price %>
 </p>
+
+
 
 <%= link_to "Download", rails_blob_path(@game.source[0], disposition: 'attachment') %> |
 <%= link_to 'Edit', edit_game_path(@game) %> |

@@ -14,6 +14,7 @@ class GamesController < ApplicationController
 
   # GET /games/new
   def new
+    @statusTypes = ["Relesed", "Beta", "Alpha"]
     @game = Game.new
   end
 
@@ -25,7 +26,9 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
-
+    if(params[:game][:status] != "Relesed")
+      @game.relese_date = params[:game][:relese_date]
+    end
     respond_to do |format|
       if @game.save
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
@@ -65,10 +68,11 @@ class GamesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_game
       @game = Game.find(params[:id])
+      @statusTypes = ["Relesed", "Beta", "Alpha"]
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:name, :desc, :price, source: [])
+      params.require(:game).permit(:name, :desc, :price, :status, source: [])
     end
 end

@@ -27,6 +27,14 @@
   </div>
 
   <div class="field">
+    <%= form.select :status, (@statusTypes.each {|s| s}) %>
+  </div>
+
+  <div class="field">
+    <%= form.date_field :relese_date %>
+  </div>
+
+  <div class="field">
     <%= form.label :source %>
     <%= form.file_field :source, multiple: true, direct_upload: true %>
   </div>
