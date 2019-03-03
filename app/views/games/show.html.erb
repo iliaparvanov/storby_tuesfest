@@ -37,7 +37,7 @@
   <% end %><br>
   <%= r.user.email %><br>
   <%= r.created_at.to_date %><br><br>
-  <%= r.text %><br>
+  <%= r.text.gsub("\n", "<br />").html_safe %><br>
 
   <br>
 <% end %>

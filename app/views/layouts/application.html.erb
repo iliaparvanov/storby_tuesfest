@@ -44,6 +44,7 @@
           <div class="buttons">
             <% if user_signed_in? %>
               Logged in as <strong><%= current_user.email %></strong>
+              <%= image_tag(url_for(current_user.profile_pic))%>
               <%= link_to 'Edit profile', edit_user_registration_path, :class => 'button is-dark' %>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'button is-light'  %>
             <% else %>
