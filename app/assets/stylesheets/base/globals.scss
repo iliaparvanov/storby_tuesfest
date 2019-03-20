@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto|Space+Mono');
+
+$family-sans-serif: "Roboto", sans-serif;
+$family-primary: $family-sans-serif;
+$family-secondary: "Space Mono", monospace;
+
+$black: #000F10;
+$white: #FCFCFC;
+$grey: #EEF0F2;
+$cyan: #5CC6FC;
+$turquoise: #83E1CF;
+
+$cyan-invert: $white;
+
+$primary: $cyan;
+$primary-invert: $cyan-invert;
+$link: $turquoise;
+
+$body-background-color: $white;
+$button-text-color: $white;
+// $input-border-color: $primary;

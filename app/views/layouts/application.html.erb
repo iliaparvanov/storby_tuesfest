@@ -30,10 +30,10 @@
       <div class="navbar-start">
         <div class="field has-addons navbar-item">
           <div class="control">
-            <input class="input" type="text" placeholder="Search...">
+            <input class="input is-primary" type="text" placeholder="Search...">
           </div>
           <div class="control">
-            <a class="button is-dark">
+            <a class="button is-primary">
               <%= fa_icon "search" %>
             </a>
           </div>
@@ -45,11 +45,15 @@
             <% if user_signed_in? %>
               Logged in as <strong><%= current_user.email %></strong>
               <%= image_tag(url_for(current_user.profile_pic))%>
-              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'button is-dark' %>
-              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'button is-light'  %>
+              <div class="buttons">
+                <%= link_to 'Edit profile', edit_user_registration_path, :class => 'button is-primary' %>
+                <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'button is-light'  %>
+              </div>
             <% else %>
-              <%= link_to "Sign up", new_user_registration_path, :class => 'button is-dark'  %> 
-              <%= link_to "Login", new_user_session_path, :class => 'button is-light'  %>
+              <div class="buttons">
+                <%= link_to "Sign up", new_user_registration_path, :class => 'button is-primary'  %> 
+                <%= link_to "Login", new_user_session_path, :class => 'button is-light'  %>
+              </div>
             <% end %>
           </div>
         </div>
