@@ -5,5 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :reviews
+  belongs_to :role, optional: true
   has_one_attached :profile_pic
+
+  before_create :set_default_role
+
+  private
+  def set_default_role
+    self.role ||= Role.find_by_name('user')
+  end
 end
