@@ -14,50 +14,54 @@
 
 <body>
   <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a href="/" class="navbar-item">
-        Storby
-      </a>
-      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+    <%# navbar %>
+    <div class="container">
+      <div class="navbar-brand">
+        <a href="/" class="navbar-item">
+          Storby
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
 
-        <%# <%= fa_icon "bars" %>
-      </a>
+          <%# <%= fa_icon "bars" %>
+        </a>
+      </div>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+          <div class="field has-addons navbar-item">
+            <div class="control">
+              <input class="input is-primary" type="text" placeholder="Search...">
+            </div>
+            <div class="control">
+              <a class="button is-primary">
+                <%= fa_icon "search" %>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="navbar-end">
+          <div class="navbar-item">
+            <div class="buttons">
+              <% if user_signed_in? %>
+                Logged in as <strong><%= current_user.email %></strong>
+                <%= image_tag(url_for(current_user.profile_pic))%>
+                <div class="buttons">
+                  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'button is-primary' %>
+                  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'button is-light'  %>
+                </div>
+              <% else %>
+                <div class="buttons">
+                  <%= link_to "Sign up", new_user_registration_path, :class => 'button is-primary'  %> 
+                  <%= link_to "Login", new_user_session_path, :class => 'button is-light'  %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="navbar-menu">
-      <div class="navbar-start">
-        <div class="field has-addons navbar-item">
-          <div class="control">
-            <input class="input is-primary" type="text" placeholder="Search...">
-          </div>
-          <div class="control">
-            <a class="button is-primary">
-              <%= fa_icon "search" %>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <% if user_signed_in? %>
-              Logged in as <strong><%= current_user.email %></strong>
-              <%= image_tag(url_for(current_user.profile_pic))%>
-              <div class="buttons">
-                <%= link_to 'Edit profile', edit_user_registration_path, :class => 'button is-primary' %>
-                <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'button is-light'  %>
-              </div>
-            <% else %>
-              <div class="buttons">
-                <%= link_to "Sign up", new_user_registration_path, :class => 'button is-primary'  %> 
-                <%= link_to "Login", new_user_session_path, :class => 'button is-light'  %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
     </div>
   </nav>
   <% if notice %>
@@ -66,7 +70,9 @@
   <% if alert %>
     <p class="alert alert-danger"><%= alert %></p>
   <% end %>
-  <%= yield %>
+  <div class="container">
+    <%= yield %>
+  </div>
 </body>
 
 </html>
