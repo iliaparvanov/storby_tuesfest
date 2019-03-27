@@ -56,8 +56,9 @@
         </label>
       </div>
 
-
-      <%= f.select :role, Role.all.collect {|r| r.name} %>
+      <div class="select field">
+        <%= f.select :role, Role.all.collect {|r| r.name} %>
+      </div>
       <div class="actions">
         <%= f.submit "Sign up", class: 'button is-link is-fullwidwt' %>
       </div>
