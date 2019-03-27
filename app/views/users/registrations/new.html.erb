@@ -40,27 +40,31 @@
           </span>
         </div>
       </div>
-
-      <div class="field">
-        <%= f.label :profile_pic, class: 'label hidden' %>
-        <label class="file-label">
-          <%= f.file_field :profile_pic, class: 'file-input' %>
-          <span class="file-cta">
-            <span class="file-icon">
-              <%= fa_icon "upload" %>
-            </span>
-            <span class="file-label">
-              Choose a file…
-            </span>
-          </span>
-        </label>
-      </div>
-
-      <div class="select field">
-        <%= f.select :role, Role.all.collect {|r| r.name} %>
+      <div class="columns">
+        <div class="column is-6">
+          <div class="field">
+            <%= f.label :profile_pic, class: 'label hidden' %>
+            <label class="file-label">
+              <%= f.file_field :profile_pic, class: 'file-input' %>
+              <span class="file-cta">
+                <span class="file-icon">
+                  <%= fa_icon "upload" %>
+                </span>
+                <span class="file-label">
+                  Choose a file…
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="select field is-pulled-right">
+            <%= f.select :role, Role.all.collect {|r| r.name} %>
+          </div>
+        </div>
       </div>
       <div class="actions">
-        <%= f.submit "Sign up", class: 'button is-link is-fullwidwt' %>
+        <%= f.submit "Sign up", class: 'button is-link is-fullwidth' %>
       </div>
     <% end %>
   </div>
