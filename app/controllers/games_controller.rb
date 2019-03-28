@@ -28,11 +28,20 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
+    @game.imageCounter = params[:game][:images].length
+
     if(params[:game][:status] != "Relesed")
       @game.relese_date = params[:game][:relese_date]
     end
     respond_to do |format|
       if @game.save
+        counterForImages = 1
+        params[:game][:images].each do |image|
+          Cloudinary::Uploader.upload(image.tempfile.path, 
+          :folder => "storby/" + params[:game][:name], :public_id => counterForImages.to_s, :overwrite => true, 
+          :resource_type => "image")
+          counterForImages += 1
+        end
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else

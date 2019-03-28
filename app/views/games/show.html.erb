@@ -27,6 +27,12 @@
   <%= @game.price %>
 </p>
 
+<% (1..@game.imageCounter).to_a.each do |i| %>
+  <a  class="pop">
+      <%= image_tag(("https://res-5.cloudinary.com/moses-nfsg/image/upload/v1/storby/" + @game.name + "/" + i.to_s), width: "200px", height: "200px") %>
+  </a>
+<% end %>
+
 <%= render 'reviews/form', review: @review %>	
 
 <% @reviews.each do |r| %>
