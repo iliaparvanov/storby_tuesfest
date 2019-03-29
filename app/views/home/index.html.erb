@@ -19,29 +19,32 @@
         <!-- <span class="is-size-5">All genres</span> -->
     </div>
 </div>
-
-<div class="columns">
+<% @games.each do |game| %>
+<div class="columns" >
     <div class="column is-3">
         <div class="card">
+            <%= link_to(game) do %>
             <div class="card-image">
                 <figure class="image is-4by3">
-                    <img src="https://www.desktopbackground.org/download/1280x960/2011/06/23/223483_league-of-legends-wallpapers_1920x1080_h.jpg"
-                        alt="Placeholder image">
+                    <%= image_tag(("https://res.cloudinary.com/moses-nfsg/image/upload/v1549921456/storby/" + game.name + "/1")) %>
                 </figure>
             </div>
             <div class="card-content">
                 <div class="columns is-vcentered">
                     <div class="column is-8">
-                        <span class="title is-5">League of Legends</span>
+                        <span class="title is-5"><%= game.name %></span>
                     </div>
                     <div class="column is-4 has-text-right">
-                        <span>Free</span>
+                        <span><%= game.price %></span>
                     </div>
                 </div>
             </div>
+            <% end %>
         </div>
     </div>
-    <div class="column is-3">
+    <!-- <%= link_to 'Show', game, id: "game" + (game.id).to_s, name: "asdf", style: "display: none;" %> -->
+<% end %>
+    <!-- <div class="column is-3">
         <div class="card">
             <div class="card-image">
                 <figure class="image is-4by3">
@@ -99,5 +102,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 </div>

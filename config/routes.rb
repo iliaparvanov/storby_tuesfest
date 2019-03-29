@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :userrails
   get "/", to: "home#index"
   resources :home
   resources :reviews
