@@ -35,7 +35,11 @@
                         <span class="title is-5"><%= game.name %></span>
                     </div>
                     <div class="column is-4 has-text-right">
-                        <span><%= game.price %></span>
+                        <% if game.price == 0 %>
+                            <span>Free</span>
+                        <% else %>
+                            <span><%= game.price %></span>
+                        <% end %>
                     </div>
                 </div>
             </div>

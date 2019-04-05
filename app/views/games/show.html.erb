@@ -24,7 +24,11 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @game.price %>
+  <% if @game.price == 0 %>
+    <span>Free</span>
+  <% else %>
+    <span><%= @game.price %></span>
+  <% end %>
 </p>
 
 <% (1..@game.imageCounter).to_a.each do |i| %>
