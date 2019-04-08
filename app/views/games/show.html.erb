@@ -1,56 +1,103 @@
-<p id="notice"><%= notice %></p>
+<br>
 
-<p>
-  <strong>Name:</strong>
-  <%= @game.name %>
-</p>
+<section class="section">
+  <div class="container">
+    <h1 class="title">
+      <%= @game.name %>    
+    </h1>
+    <div class="tile is-ancestor">
+      <div class="tile is-8 is-parent">
+        <div class="tile is-child">
+          <% (1..@game.imageCounter).to_a.each do |i| %>
+            <a class="pop">
+              <figure class="image is-16by9">
+                <%= image_tag(("https://res-5.cloudinary.com/moses-nfsg/image/upload/v1/storby/" + @game.name + "/" + i.to_s)) %>
+              </figure>
+            </a>
+          <% end %>
+        </div>
+      </div>
 
-<p>
-  <strong>Desc:</strong>
-  <%= @game.desc %>
-</p>
+      <div class="tile is-4 is-vertical is-parent">
+        <div class="tile is-child">
+          <div class="content">
+            <p class="is-size-4">
+              <%= @game.desc %>
+            </p>
+          </div>
+        </div>
+        <div class="tile is-child">
+          <% if @game.relese_date %>
+            <p>
+              <strong>Relese date:</strong>
+              <%= @game.relese_date %>
+            </p>
+          <% end %>
 
-<% if @game.relese_date %>
-	<p>
-	  <strong>Relese date:</strong>
-	  <%= @game.relese_date %>
-	</p>
-<% end %>
+          <p>
+            <strong>Status:</strong>
+            <%= @game.status %>
+          </p>
 
-<p>
-  <strong>Status:</strong>
-  <%= @game.status %>
-</p>
+          <p>
+            <strong>Price:</strong>
+            <% if @game.price == 0 %>
+              <span>Free</span>
+            <% else %>
+              <span><%= @game.price %></span>
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-<p>
-  <strong>Price:</strong>
-  <% if @game.price == 0 %>
-    <span>Free</span>
-  <% else %>
-    <span><%= @game.price %></span>
-  <% end %>
-</p>
+<section class="section">
+  <div class="container">
+    <strong class="is-size-3"><%= link_to "Download", rails_blob_path(@game.source[0], disposition: 'attachment') %></strong>
+  </div>
+</section>
 
-<% (1..@game.imageCounter).to_a.each do |i| %>
-  <a  class="pop">
-      <%= image_tag(("https://res-5.cloudinary.com/moses-nfsg/image/upload/v1/storby/" + @game.name + "/" + i.to_s), width: "200px", height: "200px") %>
-  </a>
-<% end %>
+<section class="section">
+  <div class="container">
+    <%= render 'reviews/form', review: @review %>	
+  </div>
+</section>
 
-<%= render 'reviews/form', review: @review %>	
-
-<% @reviews.each do |r| %>
-  <% if r.recommended %>
-    <strong>Recommended</strong>
-  <% else %>
-    <strong>Not Recommended</strong>
-  <% end %><br>
-  <%= r.user.email %><br>
-  <%= r.created_at.to_date %><br><br>
-  <%= r.text.gsub("\n", "<br />").html_safe %><br>
-
-  <br>
-<% end %>
-<%= link_to "Download", rails_blob_path(@game.source[0], disposition: 'attachment') %> |
-<%= link_to 'Edit', edit_game_path(@game) %> |
-<%= link_to 'Back', games_path %>
+<section class="section">
+  <div class="container">
+    <div class="tabs is-medium">
+      <ul>
+        <li class="is-active">
+          <span class="icon is-small "><%= fa_icon "angle-down" %></span>
+          <span>Reviews from other users</span>
+        </li>
+      </ul>
+    </div>
+    <% @reviews.each do |r| %>
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <%= image_tag(url_for(r.user.profile_pic), style: "height: 64px; width:64px;") %>
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="content">
+            <strong><%= r.user.email %></strong>
+            <small><%= r.created_at.to_date %></small>
+            <br>
+            <%= r.text.gsub("\n", "<br />").html_safe %>
+          </div>
+        </div>
+        <div class="media-right">
+          <% if r.recommended %>
+            <strong>Recommended</strong>
+          <% else %>
+            <strong>Not Recommended</strong>
+          <% end %>
+        </div>
+      </article>
+    <% end %>
+  </div>
+</section>

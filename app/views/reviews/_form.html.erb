@@ -12,27 +12,42 @@
   <% end %>
 
   <% if user_signed_in? %>
+    <div class="box">
+      <article class="media">
+        <figure class="media-left">
+          <p class="image is-64x64">
+            <%= image_tag(url_for(current_user.profile_pic), style: "height: 64px; width:64px;") %>
+          </p>
+        </figure>
+        <div class="media-content">
+          <div class="field">
+            <%= form.text_area :text, class: "textarea"%>
+          </div>
 
-    <div class="field">
-      <%= form.label :text %>
-      <%= form.text_area :text, cows: 72, rows: 25, wrap: "Hard", style: "width: 40%; height: 15%"%>
-    </div>
+          <nav class="level">
+            <div class="level-left">
+              <div class="level-item">
+                <label class="checkbox">
+                  <%= form.check_box :recommended %> Recommended
+                </label>
+              </div>
+            </div>
+            <div class="level-right">
+              <div class="level-item">
+                <%= form.submit class: "button is-link" %>
+              </div>
+            </div>
+          </nav>
 
-    <div class="field">
-      <%= form.label :recommended %>
-      <%= form.check_box :recommended %>
-    </div>
+          <div class="field">
+            <%= form.hidden_field :game, value: @game.id %>
+          </div>
 
-    <div class="field">
-      <%= form.hidden_field :game, value: @game.id %>
-    </div>
-
-    <div class="field">
-      <%= form.hidden_field :user, value: current_user.id %>
-    </div>
-
-    <div class="actions">
-      <%= form.submit %>
+          <div class="field">
+            <%= form.hidden_field :user, value: current_user.id %>
+          </div>
+        </div>
+      </article>
     </div>
   <% end %>
 <% end %>
