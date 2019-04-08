@@ -1,12 +1,13 @@
-<br>
 <p id="notice"><%= notice %></p>
-
-<div class="columns">
-    <div class="column has-text-centered">
-        <span class="is-size-4">All Games</span>
-    </div>
-</div>
-<br>
+<section class="section">
+  <div class="columns">
+      <div class="column has-text-centered">
+          <span class="is-size-4">All Games</span>
+      </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
     <% @games.each do |game| %>
       <div class="card">
         <%= link_to(game) do %>
@@ -14,7 +15,7 @@
             <div class="columns is-mobile is-vcentered">
               <div class="column is-2">
                 <figure class="image is-16by9">
-                  <%= image_tag(("https://res.cloudinary.com/moses-nfsg/image/upload/v1549921456/storby/" + game.name + "/1"), style: "object-fit: cover;") %>
+                  <%= image_tag(("https://res.cloudinary.com/moses-nfsg/image/upload/v1549921456/storby/" + game.name + "/1")) %>
                 </figure>
               </div>
               <div class="column is-6">
@@ -33,10 +34,13 @@
       </div>
       <br>
     <% end %>
-      
+  </div>
+
     
 
-<br>
 <% if current_user.present? && current_user.role.name == 'developer' %>
-  <%= link_to 'New Game', new_game_path %>
+  <div class="container">
+    <%= link_to 'New Game', new_game_path %>
+  </div>
 <% end %>
+</section>

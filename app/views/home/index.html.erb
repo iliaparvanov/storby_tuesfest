@@ -1,53 +1,63 @@
-<div class="columns">
-    <div class="column has-text-centered">
-        <span class="is-size-4">Great Games</span>
-    </div>
-</div>
-
-<div class="columns">
-    <div class="column">
-        <h1> Beautiful slider here </h1>
-    </div>
-</div>
-
-<div class="columns is-vcentered">
-    <div class="column is-2"></div>
-    <div class="column is-8 has-text-centered">
-        <span class="is-size-4">Top deals</span>
-    </div>
-    <div class="column is-2 has-text-right">
-        <!-- <span class="is-size-5">All genres</span> -->
-    </div>
-</div>
-<% @games.each do |game| %>
-<div class="columns" >
-    <div class="column is-3">
-        <div class="card">
-            <%= link_to(game) do %>
-            <div class="card-image">
-                <figure class="image is-4by3">
-                    <%= image_tag(("https://res.cloudinary.com/moses-nfsg/image/upload/v1549921456/storby/" + game.name + "/1")) %>
-                </figure>
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column has-text-centered">
+                <span class="is-size-4">Great Games</span>
             </div>
-            <div class="card-content">
-                <div class="columns is-vcentered">
-                    <div class="column is-8">
-                        <span class="title is-5"><%= game.name %></span>
-                    </div>
-                    <div class="column is-4 has-text-right">
-                        <% if game.price == 0 %>
-                            <span>Free</span>
-                        <% else %>
-                            <span><%= game.price %></span>
-                        <% end %>
-                    </div>
+        </div>
+
+        <div class="columns">
+            <div class="column">
+                <h1> Beautiful slider here </h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-vcentered">
+            <div class="column is-2"></div>
+            <div class="column is-8 has-text-centered">
+                <span class="is-size-4">Top deals</span>
+            </div>
+            <div class="column is-2 has-text-right">
+                <!-- <span class="is-size-5">All genres</span> -->
+            </div>
+        </div>
+
+        <div class="columns is-multiline" >
+            <% @games.each do |game| %>
+            <div class="column is-one-quarter">
+                <div class="card">
+                    <%= link_to(game) do %>
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <%= image_tag(("https://res.cloudinary.com/moses-nfsg/image/upload/v1549921456/storby/" + game.name + "/1")) %>
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="columns is-mobile is-vcentered">
+                                <div class="column is-8">
+                                    <span class="title is-5"><%= game.name %></span>
+                                </div>
+                                <div class="column is-4 has-text-right">
+                                    <% if game.price == 0 %>
+                                        <span>Free</span>
+                                    <% else %>
+                                        <span><%= game.price %></span>
+                                    <% end %>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
                 </div>
             </div>
             <% end %>
         </div>
     </div>
-    <!-- <%= link_to 'Show', game, id: "game" + (game.id).to_s, name: "asdf", style: "display: none;" %> -->
-<% end %>
+</section>
+
     <!-- <div class="column is-3">
         <div class="card">
             <div class="card-image">
@@ -107,4 +117,3 @@
             </div>
         </div>
     </div> -->
-</div>
