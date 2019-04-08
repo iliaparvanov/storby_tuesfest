@@ -10,7 +10,7 @@ class GamesController < ApplicationController
     if @search.present?
       puts(@search[:name])
       @name = @search[:name]
-      @games = Game.where(name: @name)
+      @games = Game.where("LOWER(name) LIKE ?", "%#{@name.downcase}%")
     end
   end
 
