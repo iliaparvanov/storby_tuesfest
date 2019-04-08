@@ -51,16 +51,10 @@
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
-            <div class="field has-addons">
-              <div class="control">
-                <input class="input" type="text" placeholder="Search...">
-              </div>
-              <div class="control">
-                <a class="button">
-                  <%= fa_icon "search" %>
-                </a>
-              </div>
-            </div>
+            <%= form_with scope: :search, url: games_path, method: :get, local: true do |f| %>
+              <%= f.text_field :name %>
+              <%= f.submit "Search" %>
+            <% end %>
           </div>
           <% if user_signed_in? %>
           <div class="navbar-item has-dropdown is-hoverable">
