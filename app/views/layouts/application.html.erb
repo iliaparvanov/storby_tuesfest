@@ -52,8 +52,14 @@
         <div class="navbar-end">
           <div class="navbar-item">
             <%= form_with scope: :search, url: games_path, method: :get, local: true do |f| %>
-              <%= f.text_field :name %>
-              <%= f.submit "Search" %>
+              <div class="field has-addons">
+                <div class="control">
+                  <%= f.text_field :name, class: "input" %>
+                </div>
+                <div class="control">
+                  <%= f.submit "Search", class: 'button' %>
+                </div>
+              </div>
             <% end %>
           </div>
           <% if user_signed_in? %>
