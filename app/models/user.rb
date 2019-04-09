@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   before_create :set_default_role
 
+  has_and_belongs_to_many :games
+
   private
   def set_default_role
     self.role ||= Role.find_by_name('user')

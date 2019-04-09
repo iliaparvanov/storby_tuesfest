@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy, :add_to_user]
 
   # GET /games
   # GET /games.json
@@ -60,17 +60,18 @@ class GamesController < ApplicationController
 
   # PATCH/PUT /games/1
   # PATCH/PUT /games/1.json
-  def update
-    respond_to do |format|
-      if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
-        format.json { render :show, status: :ok, location: @game }
-      else
-        format.html { render :edit }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   puts("BLBAABLBALAB")
+  #   respond_to do |format|
+  #     if @game.update(game_params)
+  #       format.html { redirect_to @game, notice: 'Game was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @game }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @game.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /games/1
   # DELETE /games/1.json
@@ -79,6 +80,21 @@ class GamesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to games_url, notice: 'Game was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def add_to_user 
+    if user_signed_in?
+      user = User.find(current_user.id)
+      puts(current_user.id)
+      @game.users << user
+      if @game.save
+        format.html { redirect_to @game, notice: 'Game was successfully added to your library.' }
+      else 
+        format.html { redirect_to @game, notice: 'Something went wrong! Game was not added to your library.' }
+      end
+    else 
+      format.html { redirect_to @game, alert: 'You are not currently logged in!' }
     end
   end
 
