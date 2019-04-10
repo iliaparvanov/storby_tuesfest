@@ -1,0 +1,10 @@
+<section class="section">
+    <div class="container">
+        <% if user_signed_in? %>
+            <% current_user.games.each do |game| %>
+                <strong><%= game.name %>
+                <br>
+            <% end %>
+        <% end %>
+    </div>
+</section>
