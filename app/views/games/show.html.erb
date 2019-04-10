@@ -57,7 +57,10 @@
   <div class="container">
     <strong class="is-size-3"><%= link_to "Download", rails_blob_path(@game.source[0], disposition: 'attachment') %></strong>
     <% if user_signed_in? %>
-      <strong class="is-size-3"><%= link_to "Add to library", {controller: 'games', action: 'add_to_user'}, id: @game, method: :put %></strong>
+      <%= form_with(model: @game, local: true, url: '/games/' + @game.id.to_s + '/buy') do |f| %>
+        <%= f.submit "Add to library", class: 'button' %>
+      <% end %>
+      <%# <strong class="is-size-3"><%= link_to "Add to library", {controller: 'games', action: 'add_to_user'}, id: @game, method: :put %>
     <% end %>
   </div>
 </section>

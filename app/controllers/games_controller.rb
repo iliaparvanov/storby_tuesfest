@@ -89,12 +89,19 @@ class GamesController < ApplicationController
       puts(current_user.id)
       @game.users << user
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully added to your library.' }
+        respond_to do |format|
+          format.html { redirect_to @game, notice: 'Game was successfully added to your library.' }
+          format.json { render :show, status: :ok, location: @game }
+        end
       else 
-        format.html { redirect_to @game, notice: 'Something went wrong! Game was not added to your library.' }
+        respond_to do |format|
+          format.html { redirect_to @game, notice: 'Something went wrong! Game was not added to your library.' }
+        end
       end
     else 
-      format.html { redirect_to @game, alert: 'You are not currently logged in!' }
+      respond_to do |format|
+        format.html { redirect_to @game, alert: 'You are not currently logged in!' }
+      end
     end
   end
 
