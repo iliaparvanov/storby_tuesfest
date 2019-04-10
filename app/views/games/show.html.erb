@@ -55,12 +55,15 @@
 
 <section class="section">
   <div class="container">
-    <strong class="is-size-3"><%= link_to "Download", rails_blob_path(@game.source[0], disposition: 'attachment') %></strong>
+    
     <% if user_signed_in? %>
-      <%= form_with(model: @game, local: true, url: '/games/' + @game.id.to_s + '/buy') do |f| %>
-        <%= f.submit "Add to library", class: 'button' %>
+      <% unless current_user.games.where(id: @game.id).present? %>
+        <%= form_with(model: @game, local: true, url: '/games/' + @game.id.to_s + '/buy') do |f| %>
+          <%= f.submit "Add to library", class: 'button' %>
+        <% end %>
+      <% else %>
+        <strong class="is-size-4">Game is already in your library | <%= link_to "Download", rails_blob_path(@game.source[0], disposition: 'attachment'), class: 'button' %></strong>
       <% end %>
-      <%# <strong class="is-size-3"><%= link_to "Add to library", {controller: 'games', action: 'add_to_user'}, id: @game, method: :put %>
     <% end %>
   </div>
 </section>

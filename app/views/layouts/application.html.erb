@@ -88,11 +88,38 @@
     </div>
   </nav>
   <% if notice %>
-  <p class="alert alert-success"><%= notice %></p>
+    <section class="section">
+      <div class="container">
+        <div class="notification is-success">
+          <button class="delete"></button>
+          <%= notice %>
+        </div>
+      </div>
+    </section>
   <% end %>
   <% if alert %>
-  <p class="alert alert-danger"><%= alert %></p>
+    <section class="section">
+      <div class="container">
+        <div class="notification is-danger">
+          <button class="delete"></button>
+          <%= alert %>
+        </div>
+      </div>
+    </section>
   <% end %>
   <%= yield %>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+        $notification = $delete.parentNode;
+        $container = $notification.parentNode;
+        $section = $container.parentNode;
+        $delete.addEventListener('click', () => {
+          $section.remove();
+        });
+      });
+    });
+  </script>
 </body>
 </html>
