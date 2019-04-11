@@ -1,1 +1,51 @@
-<%= render template: "layouts/application" %>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Storby</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+  <% if notice %>
+    <section class="section">
+      <div class="container">
+        <div class="notification is-success">
+          <button class="delete"></button>
+          <%= notice %>
+        </div>
+      </div>
+    </section>
+  <% end %>
+  <% if alert %>
+    <section class="section">
+      <div class="container">
+        <div class="notification is-danger">
+          <button class="delete"></button>
+          <%= alert %>
+        </div>
+      </div>
+    </section>
+  <% end %>
+
+  <%= yield %>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+        $notification = $delete.parentNode;
+        $container = $notification.parentNode;
+        $section = $container.parentNode;
+        $delete.addEventListener('click', () => {
+          $section.remove();
+        });
+      });
+    });
+  </script>
+</body>
+</html>

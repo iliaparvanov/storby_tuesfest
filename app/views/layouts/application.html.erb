@@ -79,8 +79,8 @@
           <%= image_tag(url_for(current_user.profile_pic), size: "64x64", style: 'object-fit: cover;', class: 'navbar-avatar') %>
           <% end %>
           <% else %>
-            <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-item' %> 
-            <%= link_to "Log in", new_user_session_path, :class => 'navbar-item' %>  
+            <%#<%= link_to "Sign up", new_user_registration_path, :class => 'navbar-item' %> 
+            <%# <%= link_to "Log in", new_user_session_path, :class => 'navbar-item' %>  
           <% end %>
 
         </div>
