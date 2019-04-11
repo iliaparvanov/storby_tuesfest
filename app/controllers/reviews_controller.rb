@@ -28,7 +28,7 @@ class ReviewsController < ApplicationController
     @review.game_id = params[:review][:game]
     respond_to do |format|
       if @review.save
-        format.html { redirect_to Game.find(params[:review][:game]), notice: 'Благодарим Ви, че оставихте обратна връзка за тази игра!') }
+        format.html { redirect_to Game.find(@review.game_id), notice: 'Благодарим Ви, че оставихте обратна връзка за тази игра!' }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }

@@ -8,13 +8,13 @@
     <div class="tile is-ancestor">
       <div class="tile is-8 is-parent">
         <div class="tile is-child">
-          <% (1..@game.imageCounter).to_a.each do |i| %>
+          <%#<% (1..@game.imageCounter).to_a.each do |i| %>
             <a class="pop">
               <figure class="image is-16by9">
-                <%= image_tag(("https://res-5.cloudinary.com/moses-nfsg/image/upload/v1/storby/" + @game.name + "/" + i.to_s)) %>
+                <%= image_tag(("https://res-5.cloudinary.com/moses-nfsg/image/upload/v1/storby/" + @game.name + "/" + 1.to_s)) %>
               </figure>
             </a>
-          <% end %>
+         <%# <% end %>
         </div>
       </div>
 
@@ -96,15 +96,21 @@
 </section>
 
 <script>
+document.addEventListener("turbolinks:load", function() {
   const dlbtn = document.getElementById('download-button');
-  dlbtn.addEventListener('click', () => {
-    Rails.ajax({
-      url: "/api/log_download",
-      type: "POST",
-      data: "gameid=" + dlbtn.dataset.gameid,
-      success: function(data) {
-        // console.log(data);
-      }
-    });
-  }) 
+  if (dlbtn != null) {
+    dlbtn.addEventListener('click', () => {
+        Rails.ajax({
+          url: "/api/log_download",
+          type: "POST",
+          data: "gameid=" + dlbtn.dataset.gameid,
+          success: function(data) {
+            // console.log(data);
+          }
+        });
+      }); 
+    }
+  });
+  
+  
 </script>
