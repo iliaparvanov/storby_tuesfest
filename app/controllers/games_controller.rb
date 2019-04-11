@@ -84,6 +84,18 @@ class GamesController < ApplicationController
     end
   end
 
+  def log_download
+    if params[:gameid].present?
+      game = Game.find(params[:gameid])
+      game.downloads += 1;
+      if game.save
+        respond_to do |format|
+          format.json { render json: { message: "Successfully logged download!" }, status: :ok}
+        end
+      end
+    end
+  end
+
   # def add_to_user 
   #   if user_signed_in?
   #     user = User.find(current_user.id)

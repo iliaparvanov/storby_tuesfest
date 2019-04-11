@@ -55,7 +55,7 @@
 
 <section class="section">
   <div class="container">
-        <strong class="is-size-4"><%= link_to "Download", rails_blob_path(@game.source[0], disposition: 'attachment'), class: 'button' %></strong>
+        <strong class="is-size-4"><%= link_to "Download", rails_blob_path(@game.source[0], disposition: 'attachment'), class: 'button is-medium', id: 'download-button', :data => { :gameid => @game.id.to_s } %></strong>
   </div>
 </section>
 
@@ -101,3 +101,17 @@
     <% end %>
   </div>
 </section>
+
+<script>
+  const dlbtn = document.getElementById('download-button');
+  dlbtn.addEventListener('click', () => {
+    Rails.ajax({
+      url: "/api/log_download",
+      type: "POST",
+      data: "gameid=" + dlbtn.dataset.gameid,
+      success: function(data) {
+        // console.log(data);
+      }
+    });
+  }) 
+</script>
