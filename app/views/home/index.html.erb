@@ -19,7 +19,7 @@
         <div class="columns is-vcentered">
             <div class="column is-2"></div>
             <div class="column is-8 has-text-centered">
-                <span class="is-size-4">Top deals</span>
+                <span class="is-size-4">All games</span>
             </div>
             <div class="column is-2 has-text-right">
                 <!-- <span class="is-size-5">All genres</span> -->
@@ -42,11 +42,7 @@
                                     <span class="title is-5"><%= game.name %></span>
                                 </div>
                                 <div class="column is-4 has-text-right">
-                                    <% if game.price == 0 %>
-                                        <span>Free</span>
-                                    <% else %>
-                                        <span><%= game.price %></span>
-                                    <% end %>
+                                    <span><%= game.user.teamname %></span>
                                 </div>
                             </div>
                         </div>

@@ -33,20 +33,7 @@
               <%= @game.user.teamname %>
             </p>
           <% end %>
-
-          <p>
-            <strong>Status:</strong>
-            <%= @game.status %>
-          </p>
-
-          <p>
-            <strong>Price:</strong>
-            <% if @game.price == 0 %>
-              <span>Free</span>
-            <% else %>
-              <span><%= @game.price %></span>
-            <% end %>
-          </p>
+          <p> Where can you find this project? </p>
         </div>
       </div>
     </div>
@@ -55,12 +42,20 @@
 
 <section class="section">
   <div class="container">
-        <strong class="is-size-4"><%= link_to "Download", rails_blob_path(@game.source[0], disposition: 'attachment'), class: 'button is-medium', id: 'download-button', :data => { :gameid => @game.id.to_s } %></strong>
+        <strong class="is-size-4"><%= link_to "Изтегли", rails_blob_path(@game.source[0], disposition: 'attachment'), class: 'button is-medium', id: 'download-button', :data => { :gameid => @game.id.to_s } %></strong>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
+    <div class="tabs is-medium">
+      <ul>
+        <li class="is-active">
+          <span class="icon is-small "><%= fa_icon "angle-down" %></span>
+          <span>Изпрати обратна връзка на екипа</span>
+        </li>
+      </ul>
+    </div>
     <%= render 'reviews/form', review: @review %>	
   </div>
 </section>
@@ -71,33 +66,31 @@
       <ul>
         <li class="is-active">
           <span class="icon is-small "><%= fa_icon "angle-down" %></span>
-          <span>Reviews from other users</span>
+          <span>Съобщения от потребители</span>
         </li>
       </ul>
     </div>
     <% @reviews.each do |r| %>
-      <article class="media">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <%= image_tag(url_for(r.user.profile_pic), style: "height: 64px; width:64px;") %>
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="content">
-            <strong><%= r.user.email %></strong>
-            <small><%= r.created_at.to_date %></small>
-            <br>
-            <%= r.text.gsub("\n", "<br />").html_safe %>
+      <div class="box" style="box-shadow: #888888;">
+        <article class="media">
+          <div class="media-content">
+            <div class="content">
+              <strong><%= r.username %></strong>
+              |
+              <small><%= r.created_at.to_date %></small>
+              <br>
+              <%= r.text.gsub("\n", "<br />").html_safe %>
+            </div>
           </div>
-        </div>
-        <div class="media-right">
-          <% if r.recommended %>
-            <strong>Recommended</strong>
-          <% else %>
-            <strong>Not Recommended</strong>
-          <% end %>
-        </div>
-      </article>
+          <div class="media-right">
+            <% if r.recommended %>
+              <strong style="color: green;">Recommended</strong>
+            <% else %>
+              <strong style="color: red;">Not Recommended</strong>
+            <% end %>
+          </div>
+        </article>
+      </div>
     <% end %>
   </div>
 </section>

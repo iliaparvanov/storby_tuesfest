@@ -26,10 +26,9 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.game_id = params[:review][:game]
-    @review.user_id = params[:review][:user]
     respond_to do |format|
       if @review.save
-        format.html { redirect_to Game.find(params[:review][:game]) }
+        format.html { redirect_to Game.find(params[:review][:game]), notice: 'Благодарим Ви, че оставихте обратна връзка за тази игра!') }
         format.json { render :show, status: :created, location: @review }
       else
         format.html { render :new }
@@ -70,6 +69,6 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:text, :recommended)
+      params.require(:review).permit(:username, :text, :recommended)
     end
 end

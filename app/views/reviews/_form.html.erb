@@ -11,44 +11,39 @@
     </div>
   <% end %>
 
-  <% if user_signed_in? %>
-    <div class="box">
-      <article class="media">
-        <figure class="media-left">
-          <p class="image is-64x64">
-            <%= image_tag(url_for(current_user.profile_pic), style: "height: 64px; width:64px;") %>
-          </p>
-        </figure>
-        <div class="media-content">
-          <div class="field">
-            <%= form.text_area :text, class: "textarea"%>
-          </div>
-
-          <nav class="level">
-            <div class="level-left">
-              <div class="level-item">
-                <label class="checkbox">
-                  <%= form.check_box :recommended %> Recommended
-                </label>
-              </div>
-            </div>
-            <div class="level-right">
-              <div class="level-item">
-                <%= form.submit class: "button is-link" %>
-              </div>
-            </div>
-          </nav>
-
-          <div class="field">
-            <%= form.hidden_field :game, value: @game.id %>
-          </div>
-
-          <div class="field">
-            <%= form.hidden_field :user, value: current_user.id %>
-          </div>
+  <div class="box">
+    <article class="media">
+      <div class="media-content">
+        <div class="field">
+          <%= form.label :username, "Име", class: 'label' %>
+          <%= form.text_field :username, class: 'input' %>
         </div>
-      </article>
-    </div>
-  <% end %>
+
+        <div class="field">
+          <%= form.label :text, "Съобщение", class: 'label' %>
+          <%= form.text_area :text, class: "textarea"%>
+        </div>
+
+        <nav class="level">
+          <div class="level-left">
+            <div class="level-item">
+              <label class="checkbox">
+                <%= form.check_box :recommended %> Отбележете, ако бихте препоръчали играта на приятели
+              </label>
+            </div>
+          </div>
+          <div class="level-right">
+            <div class="level-item">
+              <%= form.submit "Изпрати", class: "button is-link" %>
+            </div>
+          </div>
+        </nav>
+
+        <div class="field">
+          <%= form.hidden_field :game, value: @game.id %>
+        </div>
+      </div>
+    </article>
+  </div>
 <% end %>
 
