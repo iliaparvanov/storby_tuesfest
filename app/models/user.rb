@@ -8,12 +8,12 @@ class User < ApplicationRecord
   belongs_to :role, optional: true
   has_one_attached :profile_pic
 
-  before_create :set_default_role
+  # before_create :set_default_role
 
-  has_and_belongs_to_many :games
+  has_many :games
 
   private
-  def set_default_role
-    self.role ||= Role.find_by_name('user')
-  end
+  # def set_default_role
+  #   self.role ||= Role.find_by_name('user')
+  # end
 end

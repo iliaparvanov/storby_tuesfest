@@ -12,7 +12,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-    resource.role = Role.find_by(name: params[:user][:role])
     resource.save
     yield resource if block_given?
     if resource.persisted?
@@ -41,7 +40,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def update
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
-    resource.role = Role.find_by(name: params[:user][:role])
     resource_updated = update_resource(resource, account_update_params)
     yield resource if block_given?
     if resource_updated
@@ -74,12 +72,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.require(:sign_up).permit(:name, :email, :password, :current_password, :is_female, :date_of_birth, :profile_pic, role: [:name])
+    devise_parameter_sanitizer.require(:sign_up).permit(:name, :email, :password, :current_password, :is_female, :date_of_birth, :profile_pic)
   end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    devise_parameter_sanitizer.require(:account_update).permit(:name, :email, :password, :current_password, :is_female, :date_of_birth, :profile_pic, role: [:name])
+    devise_parameter_sanitizer.require(:account_update).permit(:name, :email, :password, :current_password, :is_female, :date_of_birth, :profile_pic)
   end
 
   # The path used after sign up.

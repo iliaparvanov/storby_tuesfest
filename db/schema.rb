@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_09_190759) do
+ActiveRecord::Schema.define(version: 2019_04_11_145902) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -42,11 +42,8 @@ ActiveRecord::Schema.define(version: 2019_04_09_190759) do
     t.string "status"
     t.date "relese_date"
     t.integer "imageCounter"
-  end
-
-  create_table "games_users", id: false, force: :cascade do |t|
-    t.integer "game_id", null: false
-    t.integer "user_id", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_games_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -60,14 +57,8 @@ ActiveRecord::Schema.define(version: 2019_04_09_190759) do
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
 
-  create_table "roles", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
 # Could not dump table "users" because of following StandardError
-#   Unknown type 'attachment' for column 'profile_pic'
+#   Unknown type '' for column 'profile_pic'
 
   create_table "views", force: :cascade do |t|
     t.string "email", default: "", null: false

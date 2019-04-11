@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy, :add_to_user]
+  before_action :authenticate_user!, except: [:show, :index]
 
   # GET /games
   # GET /games.json
@@ -34,7 +35,7 @@ class GamesController < ApplicationController
   # POST /games
   # POST /games.json
   def create
-    @game = Game.new(game_params)
+    @game = current_user.games.build(game_params)
     @game.imageCounter = params[:game][:images].length
 
     if(params[:game][:status] != "Relesed")
@@ -52,7 +53,7 @@ class GamesController < ApplicationController
         format.html { redirect_to @game, notice: 'Game was successfully created.' }
         format.json { render :show, status: :created, location: @game }
       else
-        format.html { render :new }
+        format.html { redirect_to :action => 'new', notice: 'There was an error' }
         format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end
@@ -83,27 +84,27 @@ class GamesController < ApplicationController
     end
   end
 
-  def add_to_user 
-    if user_signed_in?
-      user = User.find(current_user.id)
-      puts(current_user.id)
-      @game.users << user
-      if @game.save
-        respond_to do |format|
-          format.html { redirect_to @game, notice: 'Game was successfully added to your library.' }
-          format.json { render :show, status: :ok, location: @game }
-        end
-      else 
-        respond_to do |format|
-          format.html { redirect_to @game, notice: 'Something went wrong! Game was not added to your library.' }
-        end
-      end
-    else 
-      respond_to do |format|
-        format.html { redirect_to @game, alert: 'You are not currently logged in!' }
-      end
-    end
-  end
+  # def add_to_user 
+  #   if user_signed_in?
+  #     user = User.find(current_user.id)
+  #     puts(current_user.id)
+  #     @game.users << user
+  #     if @game.save
+  #       respond_to do |format|
+  #         format.html { redirect_to @game, notice: 'Game was successfully added to your library.' }
+  #         format.json { render :show, status: :ok, location: @game }
+  #       end
+  #     else 
+  #       respond_to do |format|
+  #         format.html { redirect_to @game, notice: 'Something went wrong! Game was not added to your library.' }
+  #       end
+  #     end
+  #   else 
+  #     respond_to do |format|
+  #       format.html { redirect_to @game, alert: 'You are not currently logged in!' }
+  #     end
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
