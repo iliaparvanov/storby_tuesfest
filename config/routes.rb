@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   devise_for :views
   resources :games
   # patch "/games/:id/buy", to: "games#add_to_user"
-  # get "/users/library", to: "users/custom#library"
+  get "/dev/dashboard", to: "users/custom#dashboard"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

@@ -1,0 +1,41 @@
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            <div class="column has-text-centered">
+                <span class="is-size-4">Games you've created</span>
+            </div>
+        </div>
+        <% current_user.games.each do |game| %>
+            <div class="card">
+                <%= link_to(game) do %>
+                <div class="box">
+                    <div class="columns is-mobile is-vcentered">
+                    <div class="column is-2">
+                        <figure class="image is-16by9">
+                        <%= image_tag(("https://res.cloudinary.com/moses-nfsg/image/upload/v1549921456/storby/" + game.name + "/1")) %>
+                        </figure>
+                    </div>
+                    <div class="column is-6">
+                        <span class="title is-5"><%= game.name %></span>
+                    </div>
+                    <div class="column is-4 has-text-right">
+                        <% if game.price == 0 %>
+                        <span>Free</span>
+                        <% else %>
+                        <span><%= game.price %></span>
+                        <% end %>
+                    </div>
+                    </div>
+                </div>
+                <% end %>
+            </div>
+            <br>
+            <% end %>
+    </div>
+</section>
+<hr>
+<section class="section">
+    <div class="container">
+        <strong><%= link_to 'New Game', new_game_path %></strong>
+    </div>
+</section>
