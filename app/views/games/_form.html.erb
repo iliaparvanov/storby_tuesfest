@@ -1,50 +1,89 @@
-<%= form_with(model: game, local: true) do |form| %>
-  <% if game.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
 
-      <ul>
-      <% game.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<section class="hero is-dark is-fullheight">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h2 class="is-size-4">New game</h2>
+        </div>
+      </div>
+      <div class="columns is-vcentered is-centered">
+        <div class="column is-one-third">
+          <%= form_with(model: game, local: true) do |form| %>
+            <% if game.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(game.errors.count, "error") %> prohibited this game from being saved:</h2>
+
+                <ul>
+                <% game.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+            <div class="field">
+              <%= form.label :name, class: 'label has-text-white' %>
+              <%= form.text_field :name, class: 'input is-medium' %>
+            </div>
+
+            <div class="field">
+              <%= form.label :desc, class: 'label has-text-white' %>
+              <%= form.text_field :desc, class: 'input is-medium' %>
+            </div>
+
+            <div class="field">
+              <%= form.label :price, class: 'label has-text-white' %>
+              <%= form.text_field :price, class: 'input is-medium' %>
+            </div>
+
+            <div class="select">
+              <%= form.select :status, (@statusTypes.each {|s| s}) %>
+            </div>
+            <br>
+            <br>
+
+            <div class="field">
+              <%= form.date_field :relese_date %>
+            </div>
+
+            <div class="field">
+              <%= form.label :source, class: 'label hidden has-text-white' %>
+              <label class="file-label">
+
+                <%= form.file_field :source, multiple: true, direct_upload: true, class: 'file-input' %>
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <%= fa_icon "upload" %>
+                  </span>
+                  <span class="file-label">
+                    Choose your source file...
+                  </span>
+                </span>
+              </label>
+            </div>
+
+            <div class="field">
+              <%= form.label :images, class: 'label hidden has-text-white' %>
+              <label class="file-label">
+                <%= form.file_field :images, :multiple => true, class: 'file-input' %>
+                <span class="file-cta">
+                  <span class="file-icon">
+                    <%= fa_icon "upload" %>
+                  </span>
+                  <span class="file-label">
+                    Choose one or more images... 
+                  </span>
+                </span>
+              </label>
+            </div>
+              <br>
+            <div class="actions">
+              <%= form.submit "Create game", class: 'button is-dark is-fullwidth' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
   </div>
-
-  <div class="field">
-    <%= form.label :desc %>
-    <%= form.text_field :desc %>
-  </div>
-
-  <div class="field">
-    <%= form.label :price %>
-    <%= form.text_field :price %>
-  </div>
-
-  <div class="field">
-    <%= form.select :status, (@statusTypes.each {|s| s}) %>
-  </div>
-
-  <div class="field">
-    <%= form.date_field :relese_date %>
-  </div>
-
-  <div class="field">
-    <%= form.label :source %>
-    <%= form.file_field :source, multiple: true, direct_upload: true %>
-  </div>
-
-  <div class="field">
-    <%= form.label :images %>
-    <%= form.file_field :images, :multiple => true %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</section>
