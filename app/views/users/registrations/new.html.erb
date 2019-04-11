@@ -22,6 +22,16 @@
             </div>
 
             <div class="field">
+              <%= f.label :teamname, class: 'label has-text-white' %>
+              <div class="control has-icons-left">
+                <%= f.text_field :teamname, class: 'input is-medium' %>
+                <span class="icon is-medium is-left">
+                  <%= fa_icon "users" %>
+                </span>
+              </div>
+            </div>
+
+            <div class="field">
               <%= f.label :password, class: 'label has-text-white' %>
               <% if @minimum_password_length %>
               <em>(<%= @minimum_password_length %> characters minimum)</em>
