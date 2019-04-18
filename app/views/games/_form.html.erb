@@ -1,5 +1,5 @@
 
-<section class="hero is-dark is-fullheight">
+<section class="hero is-dark is-fullheight-with-navbar">
   <div class="hero-body">
     <div class="container">
       <div class="columns is-centered">
@@ -45,6 +45,19 @@
 
             <div class="field">
               <%= form.date_field :relese_date %>
+            </div>
+
+            <div class="field">
+              <%= form.label :floor, class: 'label has-text-white' %>
+              <div class="control">
+                <div class="select">
+                  <%= form.select :floor, ([['1', 1], ['2', 2], ['3', 3], ['4', 4]])%>
+                </div>
+              </div>
+            </div>
+            <div class="field">
+              <%= form.label :exact_location, class: 'label has-text-white' %>
+              <%= form.text_field :exact_location, class: 'input is-medium' %>
             </div>
 
             <div class="field">

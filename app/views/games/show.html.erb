@@ -33,11 +33,15 @@
         <div class="tile is-child">
           <% if @game.user_id %>
             <p>
-              <strong>Made by:</strong>
+              <strong>Екип, разработил играта:</strong>
               <%= @game.user.teamname %>
             </p>
           <% end %>
-          <p> Where can you find this project? </p>
+          <% if @game.floor? && @game.exact_location? %>
+            <br>
+            <p>Къде можете да намерите този проект?</p>
+            <p>Етаж <%= @game.floor %>, <%= @game.exact_location %></p>
+          <% end%>
         </div>
       </div>
     </div>
@@ -115,7 +119,7 @@
       }); 
     }
 
-    
+
     var activeSlideId = 0;
     updateSlides(activeSlideId);
 

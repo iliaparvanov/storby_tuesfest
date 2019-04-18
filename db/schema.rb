@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_11_210048) do
+ActiveRecord::Schema.define(version: 2019_04_18_180053) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 2019_04_11_210048) do
     t.integer "imageCounter"
     t.integer "user_id"
     t.integer "downloads", default: 0
+    t.integer "floor"
+    t.string "exact_location"
     t.index ["user_id"], name: "index_games_on_user_id"
   end
 
