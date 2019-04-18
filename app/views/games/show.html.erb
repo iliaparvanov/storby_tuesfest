@@ -16,8 +16,8 @@
                 </figure>
               </div>
             <% end %>
-            <a id="prev-slide"><%= fa_icon "arrow-left" %></a>
-            <a id="next-slide"><%= fa_icon "arrow-right" %></a>
+            <a id="prev-slide"><%= fa_icon "arrow-left lg" %></a>
+            <a id="next-slide"><%= fa_icon "arrow-right lg" %></a>
           </div>
         </div>
       </div>
@@ -116,8 +116,7 @@
     }
 
     
-  });
-  var activeSlideId = 0;
+    var activeSlideId = 0;
     updateSlides(activeSlideId);
 
     const leftButton = document.getElementById("prev-slide");
@@ -147,5 +146,8 @@
       for (let slide of allSlides) { slide.style.display = "none" }
       allSlides[activeSlideId].style.display = "block";
     } 
+    
+  });
+  
   
 </script>
