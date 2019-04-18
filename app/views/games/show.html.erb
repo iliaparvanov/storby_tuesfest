@@ -54,19 +54,21 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="tabs is-medium">
-      <ul>
-        <li class="is-active">
-          <span class="icon is-small "><%= fa_icon "angle-down" %></span>
-          <span>Изпрати обратна връзка на екипа</span>
-        </li>
-      </ul>
+<% if @allowed_to_leave_review %>
+  <section class="section">
+    <div class="container">
+      <div class="tabs is-medium">
+        <ul>
+          <li class="is-active">
+            <span class="icon is-small"><%= fa_icon "angle-down" %></span>
+            <span>Изпрати обратна връзка на екипа</span>
+          </li>
+        </ul>
+      </div>
+      <%= render 'reviews/form', review: @review %>	
     </div>
-    <%= render 'reviews/form', review: @review %>	
-  </div>
-</section>
+  </section>
+<% end %>
 
 <section class="section">
   <div class="container">
@@ -86,6 +88,10 @@
               <strong><%= r.username %></strong>
               |
               <small><%= r.created_at.to_date %></small>
+              |
+              <% if r.ip_address? %>
+                <small><%= r.ip_address %></small>
+              <% end %>
               <br>
               <%= r.text.gsub("\n", "<br />").html_safe %>
             </div>

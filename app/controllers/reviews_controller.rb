@@ -26,6 +26,7 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.game_id = params[:review][:game]
+    @review.ip_address = current_ip_address
     respond_to do |format|
       if @review.save
         format.html { redirect_to Game.find(@review.game_id), notice: 'Благодарим Ви, че оставихте обратна връзка за тази игра!' }
@@ -69,6 +70,10 @@ class ReviewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def review_params
-      params.require(:review).permit(:username, :text, :recommended)
+      params.require(:review).permit(:username, :text, :recommended, :ip_address)
+    end
+
+    def current_ip_address
+      request.env['HTTP_X_REAL_IP'] || request.env['REMOTE_ADDR']
     end
 end

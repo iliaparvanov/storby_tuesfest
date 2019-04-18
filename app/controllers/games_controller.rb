@@ -20,6 +20,13 @@ class GamesController < ApplicationController
   def show
     @review = Review.new
     @reviews = @game.reviews
+    @allowed_to_leave_review = true;
+    @reviews.each do |r|
+      if r.ip_address == current_ip_address
+        @allowed_to_leave_review = false
+        break
+      end
+    end
   end
 
   # GET /games/new
@@ -128,5 +135,9 @@ class GamesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
       params.require(:game).permit(:name, :desc, :price, :status, :floor, :exact_location, :search, source: [],)
+    end
+
+    def current_ip_address 
+      request.env['HTTP_X_REAL_IP'] || request.env['REMOTE_ADDR']
     end
 end
