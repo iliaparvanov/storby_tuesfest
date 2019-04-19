@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Storby</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <%= favicon_link_tag %>
+</head>
+
+<% if notice %>
+    <section class="section">
+      <div class="container">
+        <div class="notification is-success">
+          <button class="delete"></button>
+          <%= notice %>
+        </div>
+      </div>
+    </section>
+  <% end %>
+  <% if alert %>
+    <section class="section">
+      <div class="container">
+        <div class="notification is-danger">
+          <button class="delete"></button>
+          <%= alert %>
+        </div>
+      </div>
+    </section>
+  <% end %>
+<div id="particles-js">
+  
+</div>
+<div id="particles-js-front" class="has-text-centered has-text-white">
+  <%# <p class="subtitle is-size-4 is-size-6-mobile is-family-secondary has-text-white">
+    Why hello there
+  </p> %>
+  <h1 class="title has-text-white is-size-1 is-size-4-mobile" id="imilia">
+    STORBY
+  </h1>
+  <%# <p class="has-text-white is-family-secondary is-size-4 is-hidden-touch">
+    Developer | Geek | Musician
+  </p> %>
+
+</div>
+<section class="hero is-fullheight has-text-white">
+    <div class="hero-head">
+        <nav class="navbar has-background-info" role="navigation" aria-label="main navigation">
+            <%# navbar %>
+            <div class="container">
+            <div class="navbar-brand">
+                <a href="/" class="navbar-item">
+                <img src="https://i.imgur.com/lHp65DU.png" height="128" width="128">
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+
+                <%# <%= fa_icon "bars" %>
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-start">
+                </div>
+                <div class="navbar-end">
+                <div class="navbar-item">
+                    <%= form_with scope: :search, url: games_path, method: :get, local: true do |f| %>
+                    <div class="field has-addons">
+                        <div class="control">
+                        <%= f.text_field :name, class: "input" %>
+                        </div>
+                        <div class="control">
+                        <%= f.submit "Search", class: 'button' %>
+                        </div>
+                    </div>
+                    <% end %>
+                </div>
+                <% if user_signed_in? %>
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link is-arrowless">
+                    <span><%= current_user.teamname %></span>
+                    </a>
+                    <div class="navbar-dropdown">
+                    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-item' %>
+                    <%= link_to 'Dashboard', { controller: 'users/custom', action: 'dashboard' }, :class => 'navbar-item'%>
+                    <hr class="navbar-divider">
+                    <%= link_to "Log out", destroy_user_session_path, method: :delete, :class => 'navbar-item'  %>
+                    </div>
+                </div>
+                <%= link_to({ controller: 'users/custom', action: 'dashboard' }, class: 'navbar-item') do %>
+
+                <%= image_tag(url_for(current_user.profile_pic), size: "64x64", style: 'object-fit: cover;', class: 'navbar-avatar') %>
+                <% end %>
+                <% else %>
+                    <%#<%= link_to "Sign up", new_user_registration_path, :class => 'navbar-item' %> 
+                    <%#<%= link_to "Log in", new_user_session_path, :class => 'navbar-item' %>  
+                <% end %>
+
+                </div>
+            </div>
+            </div>
+        </nav>
+        <div style="width: 100vw; z-index: 500; position: absolute; background-color: rgba(0, 0, 0, 0.5">
+            <div class="has-text-white has-text-centered is-size-5 is-size-7-touch" style="padding: 16px">
+                <span class="is-italic has-text-weight-semibold">
+                    Технологично училище "Електронни системи" към Технически университет - София
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="hero-body">
+    </div>
+
+    <div class="hero-foot" style="position: relative; z-index: 500;">
+        <div class="center">
+          <span class="icon is-large" style="padding: 32px">
+            <a href="#aboutme">
+              <%= fa_icon "chevron-down 2x", style: 'color: white;' %>
+            </a>
+          </span>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <div class="columns is-vcentered">
+            <div class="column is-2"></div>
+            <div class="column is-8 has-text-centered">
+                <span class="is-size-4">All games</span>
+            </div>
+            <div class="column is-2 has-text-right">
+                <!-- <span class="is-size-5">All genres</span> -->
+            </div>
+        </div>
+
+        <div class="columns is-multiline" >
+            <% @games.each do |game| %>
+            <div class="column is-one-quarter">
+                <div class="card">
+                    <%= link_to(game) do %>
+                        <div class="card-image">
+                            <figure class="image is-4by3">
+                                <%= image_tag(("https://res.cloudinary.com/moses-nfsg/image/upload/v1549921456/storby/" + game.name + "/1")) %>
+                            </figure>
+                        </div>
+                        <div class="card-content">
+                            <div class="columns is-mobile is-vcentered">
+                                <div class="column is-8">
+                                    <span class="title is-5"><%= game.name %></span>
+                                </div>
+                                <div class="column is-4 has-text-right">
+                                    <span><%= game.user.teamname %></span>
+                                </div>
+                            </div>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</section>
+
+    <%= javascript_include_tag 'http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js' %>
+    <script>
+
+        particlesJS("particles-js", {"particles":{"number":{"value":45,"density":{"enable":true,"value_area":900}},"color":{"value":"#ffffff"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":5},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":0.5,"random":true,"anim":{"enable":true,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":6,"random":true,"anim":{"enable":false,"speed":40,"size_min":0.1,"sync":false}},"line_linked":{"enable":true,"distance":400,"color":"#ffffff","opacity":0.5,"width":1},"move":{"enable":true,"speed":1.5,"direction":"none","random":false,"straight":false,"out_mode":"bounce","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":false,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":400,"size":40,"duration":2,"opacity":8,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});var count_particles, stats, update; stats = new Stats; stats.setMode(0); stats.domElement.style.position = 'absolute'; stats.domElement.style.left = '0px'; stats.domElement.style.top = '0px'; document.body.appendChild(stats.domElement); count_particles = document.querySelector('.js-count-particles'); update = function() { stats.begin(); stats.end(); if (window.pJSDom[0].pJS.particles && window.pJSDom[0].pJS.particles.array) { count_particles.innerText = window.pJSDom[0].pJS.particles.array.length; } requestAnimationFrame(update); }; requestAnimationFrame(update);;
+    </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+        $notification = $delete.parentNode;
+        $container = $notification.parentNode;
+        $section = $container.parentNode;
+        $delete.addEventListener('click', () => {
+          $section.remove();
+        });
+      });
+    });
+  </script>
+</body>
+</html>
